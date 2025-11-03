@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal GYM - مسح QR Code</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
+    <link rel="shortcut icon" href="../../favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/qrScanner.css">
+</head>
+<body>
+    <!-- Menu Toggle Button -->
+    <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="../../IMGS/logo.jpg" alt="Royal GYM" class="sidebar-logo">
+            <h2 class="sidebar-title">Royal GYM</h2>
+            <p style="color: #999; font-size: 0.9rem;">مسح QR Code</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="../HTML/dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>لوحة التحكم</span>
+            </a>
+            <a href="../HTML/memberManage.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>المتدربين</span>
+            </a>
+            <a href="../HTML/qrScanner.html" class="nav-item active">
+                <i class="fas fa-qrcode"></i>
+                <span>مسح QR</span>
+            </a>
+            <a href="../HTML/reviews.html" class="nav-item">
+                <i class="fas fa-star"></i>
+                <span>التقييمات</span>
+            </a>
+            <a href="../HTML/documentation.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>التقارير</span>
+            </a>
+            <a href="../HTML/login.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>الإعدادات</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-name">Admin</div>
+                <div class="user-role">مدير النظام</div>
+            </div>
+            <a href="../../index.html" class="btn btn-logout" style="width: 100%; justify-content: center;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>تسجيل الخروج</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-bar">
+            <h1 class="page-title">
+                <i class="fas fa-qrcode"></i> مسح QR Code - تسجيل الحضور
+            </h1>
+            <div class="top-actions">
+                <button class="btn" onclick="refreshData()">
+                    <i class="fas fa-sync-alt"></i>
+                    تحديث البيانات
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="stat-value" id="todayScans">0</div>
+                <div class="stat-label">عمليات مسح اليوم</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="activeNow">0</div>
+                <div class="stat-label">متدربين حالياً</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="avgTime">--</div>
+                <div class="stat-label">متوسط وقت الجلسة</div>
+            </div>
+        </div>
+
+        <div class="scanner-container">
+            <!-- QR Scanner -->
+            <div class="scanner-card">
+                <i class="fas fa-qrcode qr-icon"></i>
+                <h2 class="scanner-title">جاهز للمسح</h2>
+                <p class="scanner-desc">اضغط على الزر أدناه لفتح الكاميرا ومسح QR Code الخاص بالمتدرب</p>
+                <button class="btn-scan" onclick="openCamera()">
+                    <i class="fas fa-camera"></i> فتح الكاميرا
+                </button>
+
+                <!-- Manual Entry -->
+                <div class="manual-entry">
+                    <h3><i class="fas fa-keyboard"></i> إدخال يدوي</h3>
+                    <div class="input-group">
+                        <input type="text" id="memberId" placeholder="أدخل رقم المتدرب (مثال: GYM-0001)">
+                        <button class="btn-check" onclick="checkInMember()">
+                            <i class="fas fa-check-circle"></i> تسجيل الحضور
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Scans -->
+            <div class="recent-scans">
+                <h3><i class="fas fa-history"></i> عمليات المسح الأخيرة</h3>
+                <div id="recentScansList">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Popup -->
+    <div class="alert-overlay" id="alertOverlay">
+        <div class="alert-box">
+            <div class="alert-icon" id="alertIcon"></div>
+            <h2 class="alert-title" id="alertTitle"></h2>
+            <div class="alert-message" id="alertMessage"></div>
+            <div class="alert-member-info" id="alertMemberInfo" style="display: none;"></div>
+            <div class="alert-buttons" id="alertButtons">
+                <button class="alert-btn primary" onclick="closeAlert()">حسناً</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="../JS/qrScanner.js"></script>
+</body>
+</html>

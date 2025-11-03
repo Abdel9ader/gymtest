@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal GYM - لوحة التحكم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
+    <link rel="shortcut icon" href="../../favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/dash.css">
+</head>
+<body>
+    <!-- Menu Toggle Button -->
+    <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="../../IMGS/logo.jpg" alt="Royal GYM" class="sidebar-logo">
+            <h2 class="sidebar-title">Royal GYM</h2>
+            <p style="color: #999; font-size: 0.9rem;">لوحة التحكم</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="../HTML/dashboard.html" class="nav-item active">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>لوحة التحكم</span>
+            </a>
+            <a href="../HTML/memberManage.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>المتدربين</span>
+            </a>
+            <a href="../HTML/qrScanner.html" class="nav-item">
+                <i class="fas fa-qrcode"></i>
+                <span>مسح QR</span>
+            </a>
+            <a href="../HTML/reviews.html" class="nav-item">
+                <i class="fas fa-star"></i>
+                <span>التقييمات</span>
+            </a>
+            <a href="../HTML/documentation.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>التقارير</span>
+            </a>
+            <a href="../HTML/login.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>الإعدادات</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-name">Admin</div>
+                <div class="user-role">مدير النظام</div>
+            </div>
+            <a href="../../index.html" class="btn btn-logout" style="width: 100%; justify-content: center;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>تسجيل الخروج</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <h1 class="page-title">
+                <i class="fas fa-tachometer-alt"></i> لوحة التحكم
+            </h1>
+            <div class="top-actions">
+                <button class="btn" onclick="openAddMemberModal()">
+                    <i class="fas fa-user-plus"></i>
+                    إضافة متدرب
+                </button>
+                <button class="btn" onclick="refreshData()">
+                    <i class="fas fa-sync-alt"></i>
+                    تحديث البيانات
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-content">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-label">إجمالي المتدربين</div>
+                    <div class="stat-value" id="totalMembers">0</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-content">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="stat-label">الاشتراكات النشطة</div>
+                    <div class="stat-value" id="activeMembers">0</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-content">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-label">الحضور اليوم</div>
+                    <div class="stat-value" id="todayAttendance">0</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-content">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-label">إيرادات الشهر</div>
+                    <div class="stat-value" id="monthlyRevenue">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Recent Members -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-users"></i> المتدربين الحاليين
+                    </h3>
+                    <a href="memberManage.html" style="color: var(--gold); text-decoration: none; transition: all 0.3s;">
+                        عرض الكل <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+
+                <table class="members-table">
+                    <thead>
+                        <tr>
+                            <th>الاسم</th>
+                            <th>الباقة</th>
+                            <th>الحصص المتبقية</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="membersTableBody">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Quick Actions & Activity -->
+            <div>
+                <div class="card" style="margin-bottom: 2rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-bolt"></i> إجراءات سريعة
+                        </h3>
+                    </div>
+                    <div class="quick-actions">
+                        <div class="action-btn" onclick="openQRScanner()">
+                            <i class="fas fa-qrcode"></i>
+                            <h4>مسح QR Code</h4>
+                            <p>تسجيل حضور متدرب</p>
+                        </div>
+                        <div class="action-btn" onclick="openAddMemberModal()">
+                            <i class="fas fa-user-plus"></i>
+                            <h4>إضافة متدرب جديد</h4>
+                            <p>تسجيل عضوية جديدة</p>
+                        </div>
+                        <div class="action-btn" onclick="window.location.href='members.html'">
+                            <i class="fas fa-list"></i>
+                            <h4>إدارة المتدربين</h4>
+                            <p>عرض وتعديل البيانات</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-history"></i> آخر النشاطات
+                        </h3>
+                    </div>
+                    <div id="recentActivity">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Member Modal -->
+    <div class="modal" id="addMemberModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-user-plus"></i> إضافة متدرب جديد
+                </h2>
+                <button class="close-modal" onclick="closeModal('addMemberModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form id="addMemberForm">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> الاسم الكامل</label>
+                    <input type="text" id="memberName" required placeholder="أحمد محمد">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> رقم الهاتف</label>
+                    <input type="tel" id="memberPhone" required placeholder="01234567890">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-box"></i> الباقة</label>
+                    <select id="memberPackage" required>
+                        <option value="">اختر الباقة</option>
+                        <option value="Basic">Basic - 500 جنيه</option>
+                        <option value="Silver">Silver - 800 جنيه</option>
+                        <option value="Gold">Gold - 1200 جنيه</option>
+                        <option value="VIP">VIP - 2000 جنيه</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-calendar"></i> تاريخ البداية</label>
+                    <input type="date" id="memberStartDate" required>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%; justify-content: center; padding: 1.2rem;">
+                    <i class="fas fa-save"></i> حفظ وإنشاء QR Code
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- QR Code Display Modal -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-qrcode"></i> QR Code المتدرب
+                </h2>
+                <button class="close-modal" onclick="closeModal('qrModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div style="text-align: center;">
+                <h3 style="color: var(--gold); margin-bottom: 1rem;" id="qrMemberName"></h3>
+                <div class="qr-display" id="qrcode"></div>
+                <p style="color: #999; margin-bottom: 2rem;">احفظ هذا الكود أو أرسله للمتدرب</p>
+                
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn" onclick="downloadQR()" style="flex: 1; justify-content: center;">
+                        <i class="fas fa-download"></i> تحميل
+                    </button>
+                    <button class="btn" onclick="shareQR()" style="flex: 1; justify-content: center;">
+                        <i class="fab fa-whatsapp"></i> إرسال واتساب
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Scanner Modal -->
+    <div class="modal" id="qrScannerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-qrcode"></i> مسح QR Code
+                </h2>
+                <button class="close-modal" onclick="closeModal('qrScannerModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="qr-scanner" onclick="simulateQRScan()">
+                <i class="fas fa-qrcode"></i>
+                <h3 style="color: var(--gold); margin: 1rem 0;">اضغط لمسح QR Code</h3>
+                <p style="color: #999;">أو أدخل رقم المتدرب يدوياً</p>
+            </div>
+
+            <div class="form-group" style="margin-top: 2rem;">
+                <label>رقم المتدرب</label>
+                <input type="text" id="manualMemberId" placeholder="GYM-001">
+            </div>
+
+            <button class="btn" onclick="checkIn()" style="width: 100%; justify-content: center;">
+                <i class="fas fa-check"></i> تسجيل الحضور
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="../JS/dash.js"></script>
+</body>
+</html>

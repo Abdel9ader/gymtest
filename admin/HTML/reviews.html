@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal GYM - إدارة التقييمات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/reviews.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="../../IMGS/logo.jpg" alt="Royal GYM" class="sidebar-logo">
+            <h2 class="sidebar-title">Royal GYM</h2>
+            <p style="color: #999; font-size: 0.9rem;">إدارة التقييمات</p>
+        </div>
+
+        <nav style="padding: 2rem 0;">
+            <a href="../HTML/dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>لوحة التحكم</span>
+            </a>
+            <a href="../HTML/memberManage.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>المتدربين</span>
+            </a>
+            <a href="../HTML/qrScanner.html" class="nav-item">
+                <i class="fas fa-qrcode"></i>
+                <span>مسح QR</span>
+            </a>
+            <a href="../HTML/reviews.html" class="nav-item active">
+                <i class="fas fa-star"></i>
+                <span>التقييمات</span>
+            </a>
+            <a href="../../index.html" class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>تسجيل الخروج</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-bar">
+            <h1 class="page-title">
+                <i class="fas fa-star"></i> إدارة التقييمات
+            </h1>
+            <div class="filter-group">
+                <select id="ratingFilter" onchange="applyFilters()">
+                    <option value="">جميع التقييمات</option>
+                    <option value="5">5 نجوم</option>
+                    <option value="4">4 نجوم</option>
+                    <option value="3">3 نجوم</option>
+                    <option value="2">2 نجوم</option>
+                    <option value="1">1 نجمة</option>
+                </select>
+                <button class="btn-export" onclick="exportFeedbacks()">
+                    <i class="fas fa-file-pdf"></i> تصدير PDF
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="totalFeedbacks">0</div>
+                <div class="stat-label">إجمالي التقييمات</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="avgRating">0</div>
+                <div class="stat-label">متوسط التقييم</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="positiveCount">0</div>
+                <div class="stat-label">تقييمات إيجابية (4-5★)</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="thisMonth">0</div>
+                <div class="stat-label">تقييمات هذا الشهر</div>
+            </div>
+        </div>
+
+        <!-- Feedback Grid -->
+        <div class="feedback-grid" id="feedbackGrid">
+            <!-- Will be populated by JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="fas fa-comments-slash"></i>
+            <h2 style="color: var(--gold); margin-bottom: 1rem;">لا توجد تقييمات</h2>
+            <p>لم يتم استلام أي تقييمات بعد</p>
+        </div>
+    </div>
+
+    <!-- View Feedback Modal -->
+    <div class="view-modal" id="viewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-comment-dots"></i> تفاصيل التقييم
+                </h2>
+                <button class="close-modal" onclick="closeViewModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Alert Popup -->
+    <div class="alert-overlay" id="alertOverlay">
+        <div class="alert-box">
+            <div class="alert-icon" id="alertIcon"></div>
+            <h2 class="alert-title" id="alertTitle"></h2>
+            <div class="alert-message" id="alertMessage"></div>
+            <div class="alert-buttons" id="alertButtons"></div>
+        </div>
+    </div>
+
+    <script src="../JS/reviews.js"></script>
+</body>
+</html>

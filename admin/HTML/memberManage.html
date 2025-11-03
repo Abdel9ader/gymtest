@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal GYM - إدارة المتدربين</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
+    <link rel="shortcut icon" href="../../favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/memberManage.css">
+</head>
+<body>
+    <!-- Menu Toggle Button -->
+    <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="../../IMGS/logo.jpg" alt="Royal GYM" class="sidebar-logo">
+            <h2 class="sidebar-title">Royal GYM</h2>
+            <p style="color: #999; font-size: 0.9rem;">إدارة المتدربين</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="../HTML/dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>لوحة التحكم</span>
+            </a>
+            <a href="../HTML/memberManage.html" class="nav-item active">
+                <i class="fas fa-users"></i>
+                <span>المتدربين</span>
+            </a>
+            <a href="../HTML/qrScanner.html" class="nav-item">
+                <i class="fas fa-qrcode"></i>
+                <span>مسح QR</span>
+            </a>
+            <a href="../HTML/reviews.html" class="nav-item">
+                <i class="fas fa-star"></i>
+                <span>التقييمات</span>
+            </a>
+            <a href="../HTML/documentation.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>التقارير</span>
+            </a>
+            <a href="../HTML/login.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>الإعدادات</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-name">Admin</div>
+                <div class="user-role">مدير النظام</div>
+            </div>
+            <a href="../../index.html" class="btn btn-logout" style="width: 100%; justify-content: center;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>تسجيل الخروج</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <h1 class="page-title">
+                <i class="fas fa-users"></i> إدارة المتدربين
+            </h1>
+            <div class="top-actions">
+                <button class="btn" onclick="openAddMemberModal()">
+                    <i class="fas fa-user-plus"></i>
+                    إضافة متدرب
+                </button>
+                <button class="btn" onclick="refreshData()">
+                    <i class="fas fa-sync-alt"></i>
+                    تحديث البيانات
+                </button>
+            </div>
+        </div>
+
+        <!-- Filters & Search -->
+        <div class="top-bar" style="margin-bottom: 2rem;">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="ابحث عن متدرب بالاسم أو رقم الهاتف أو رقم العضوية...">
+            </div>
+            
+            <div class="filter-box">
+                <select id="packageFilter">
+                    <option value="">جميع الباقات</option>
+                    <option value="Basic">Basic</option>
+                    <option value="Silver">Silver</option>
+                    <option value="Gold">Gold</option>
+                    <option value="VIP">VIP</option>
+                </select>
+
+                <select id="statusFilter">
+                    <option value="">جميع الحالات</option>
+                    <option value="active">نشط</option>
+                    <option value="expiring">قرب الانتهاء</option>
+                    <option value="expired">منتهي</option>
+                </select>
+
+                <button class="btn" onclick="exportToExcel()">
+                    <i class="fas fa-file-excel"></i> تصدير
+                </button>
+            </div>
+        </div>
+
+        <!-- Members Grid -->
+        <div class="members-grid" id="membersGrid">
+            <!-- Will be populated by JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="fas fa-users-slash"></i>
+            <h2 style="color: var(--gold); margin-bottom: 1rem;">لا توجد نتائج</h2>
+            <p>لم يتم العثور على متدربين مطابقين للبحث</p>
+        </div>
+    </div>
+
+    <!-- QR Modal -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-qrcode"></i> QR Code
+                </h2>
+                <button class="close-modal" onclick="closeModal('qrModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div style="text-align: center;">
+                <h3 style="color: var(--gold); margin-bottom: 1rem;" id="qrMemberName"></h3>
+                <div class="qr-display" id="qrcode"></div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button class="btn" onclick="downloadQR()" style="flex: 1; justify-content: center;">
+                        <i class="fas fa-download"></i> تحميل
+                    </button>
+                    <button class="btn" onclick="shareQR()" style="flex: 1; justify-content: center;">
+                        <i class="fab fa-whatsapp"></i> واتساب
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Member Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-edit"></i> تعديل بيانات المتدرب
+                </h2>
+                <button class="close-modal" onclick="closeModal('editModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form id="editForm">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> الاسم الكامل</label>
+                    <input type="text" id="editName" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> رقم الهاتف</label>
+                    <input type="tel" id="editPhone" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-box"></i> الباقة</label>
+                    <select id="editPackage" required>
+                        <option value="Basic">Basic</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Gold">Gold</option>
+                        <option value="VIP">VIP</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%; justify-content: center; padding: 1.2rem;">
+                    <i class="fas fa-save"></i> حفظ التعديلات
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="../JS/memberManage.js"></script>
+</body>
+</html>

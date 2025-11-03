@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal GYM - اترك تقييمك</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="manifest" href="./favicon/site.webmanifest">
+    <link rel="shortcut icon" href="./favicon/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+  <div class="container">
+    <div class="feedback-card">
+      <div class="feedback-header">
+        <i class="fas fa-comments"></i>
+        <h1>شاركنا رأيك</h1>
+        <p>تقييمك يساعدنا على التحسين المستمر</p>
+      </div>
+
+      <form class="feedback-form" id="feedbackForm">
+<div class="form-row">
+  <div class="form-group">
+    <label><i class="fas fa-user"></i> الاسم الكامل</label>
+    <input type="text" id="name" placeholder="أحمد محمد" required>
+  </div>
+
+  <div class="form-group">
+    <label><i class="fas fa-phone"></i> رقم الهاتف (اختياري)</label>
+    <input type="tel" id="phone" placeholder="01234567890">
+  </div>
+</div>
+
+
+        <div class="form-group">
+          <label><i class="fas fa-star"></i> تقييمك</label>
+          <div class="rating-container">
+            <div class="rating-stars" id="ratingStars">
+              <i class="fas fa-star" data-rating="1"></i>
+              <i class="fas fa-star" data-rating="2"></i>
+              <i class="fas fa-star" data-rating="3"></i>
+              <i class="fas fa-star" data-rating="4"></i>
+              <i class="fas fa-star" data-rating="5"></i>
+            </div>
+            <div class="rating-text" id="ratingText"></div>
+          </div>
+          <input type="hidden" id="rating" required>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-comment-dots"></i> تعليقك</label>
+          <textarea id="comment" placeholder="شاركنا تجربتك في Royal GYM..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> إرسال التقييم</button>
+
+        <div class="back-link">
+          <a href="index.html"><i class="fas fa-arrow-right"></i> العودة للصفحة الرئيسية</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="success-modal" id="successModal">
+    <div class="success-content">
+      <i class="fas fa-check-circle"></i>
+      <h2>شكراً لك! 🎉</h2>
+      <p>تم إرسال تقييمك بنجاح. نحن نقدر وقتك وسنعمل دائماً على تحسين خدماتنا.</p>
+      <button class="btn-close" onclick="closeModal()"><i class="fas fa-home"></i> العودة للرئيسية</button>
+    </div>
+  </div>
+
+  <script src="feedback.js"></script>
+</body>
+</html>

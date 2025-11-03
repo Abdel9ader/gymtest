@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal GYM - Get Fit, Stay Strong</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="././favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="././favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="././favicon/favicon-16x16.png">
+    <link rel="manifest" href="././favicon/site.webmanifest">
+    <link rel="shortcut icon" href="././favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <img src="./IMGS/logo.jpg" alt="Royal GYM" class="loading-logo">
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="./IMGS/logo.jpg" alt="Royal GYM" class="logo-img">
+                <div class="logo-text">Royal GYM</div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#about">من نحن</a></li>
+                <li><a href="#packages">الباقات</a></li>
+                <li><a href="#calculator">الحاسبة</a></li>
+                <li><a href="#feedback">التقييمات</a></li>
+                <li><a href="#contact">تواصل معنا</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Get Fit, Stay Strong</h1>
+            <p>انضم إلى Royal GYM وابدأ رحلتك نحو جسم أقوى</p>
+            <a href="https://wa.me/1234567890?text=مرحباً، أريد الاشتراك في Royal GYM" class="btn-primary">
+                <i class="fab fa-whatsapp"></i> انضم الآن
+            </a>
+        </div>
+
+        <div class="floating-stats">
+        <div class="stat-item">
+            <span class="stat-number">2000+</span>
+            <span class="stat-label">عضو نشط</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">مدرب محترف</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">10+</span>
+            <span class="stat-label">سنوات خبرة</span>
+        </div>
+    </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">من نحن</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>أكثر من مجرد صالة رياضية</h3>
+                <p>Royal GYM هو وجهتك الأولى لتحقيق أهدافك الرياضية والصحية. نوفر لك بيئة احترافية مجهزة بأحدث المعدات الرياضية العالمية، مع فريق من المدربين المعتمدين ذوي الخبرة الواسعة.</p>
+                <p>نحن نؤمن بأن اللياقة البدنية ليست مجرد هدف، بل أسلوب حياة. لذلك نقدم برامج تدريبية متنوعة تناسب جميع المستويات، من المبتدئين إلى المحترفين.</p>
+
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-dumbbell"></i>
+                        <h4>معدات حديثة</h4>
+                        <p>أحدث الأجهزة الرياضية العالمية</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-users"></i>
+                        <h4>مدربين محترفين</h4>
+                        <p>فريق معتمد بخبرة واسعة</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-apple-alt"></i>
+                        <h4>استشارات تغذية</h4>
+                        <p>برامج غذائية متكاملة</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-clock"></i>
+                        <h4>مواعيد مرنة</h4>
+                        <p>مفتوح 16 ساعة يومياً</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-image">
+                <img src="./IMGS/hero.jpg" alt="Royal GYM">
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="packages" id="packages">
+        <h2 class="section-title">باقاتنا المميزة</h2>
+        <div class="packages-grid">
+            <div class="package-card">
+                <i class="fas fa-star package-icon"></i>
+                <div class="package-name">Basic</div>
+                <div class="package-price">500 <span>جنيه</span></div>
+                <div class="package-duration">شهرياً</div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check-circle"></i> 12 حصة شهرياً</li>
+                    <li><i class="fas fa-check-circle"></i> استخدام جميع الأجهزة</li>
+                    <li><i class="fas fa-check-circle"></i> خزانة شخصية مجانية</li>
+                    <li><i class="fas fa-check-circle"></i> Wi-Fi مجاني</li>
+                    <li><i class="fas fa-check-circle"></i> مياه معدنية</li>
+                </ul>
+                <a href="https://wa.me/01060524239?text=أريد الاشتراك في باقة Basic" class="btn-package">
+                    <i class="fab fa-whatsapp"></i> اشترك الآن
+                </a>
+            </div>
+
+            <div class="package-card">
+                <i class="fas fa-gem package-icon"></i>
+                <div class="package-name">Silver</div>
+                <div class="package-price">800 <span>جنيه</span></div>
+                <div class="package-duration">شهرياً</div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check-circle"></i> 20 حصة شهرياً</li>
+                    <li><i class="fas fa-check-circle"></i> فصول جماعية (Zumba, Yoga)</li>
+                    <li><i class="fas fa-check-circle"></i> استشارة تغذية مجانية</li>
+                    <li><i class="fas fa-check-circle"></i> متابعة التقدم الشهري</li>
+                    <li><i class="fas fa-check-circle"></i> خصم 10% على المكملات</li>
+                </ul>
+                <a href="https://wa.me/01060524239?text=أريد الاشتراك في باقة Silver" class="btn-package">
+                    <i class="fab fa-whatsapp"></i> اشترك الآن
+                </a>
+            </div>
+
+            <div class="package-card featured">
+                <div class="featured-badge">الأكثر شعبية</div>
+                <i class="fas fa-crown package-icon"></i>
+                <div class="package-name">Gold</div>
+                <div class="package-price">1200 <span>جنيه</span></div>
+                <div class="package-duration">شهرياً</div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check-circle"></i> حصص غير محدودة</li>
+                    <li><i class="fas fa-check-circle"></i> تدريب شخصي (8 جلسات)</li>
+                    <li><i class="fas fa-check-circle"></i> برنامج تغذية متكامل</li>
+                    <li><i class="fas fa-check-circle"></i> جميع الفصول الجماعية</li>
+                    <li><i class="fas fa-check-circle"></i> InBody مجاني شهرياً</li>
+                    <li><i class="fas fa-check-circle"></i> خصم 20% على المكملات</li>
+                </ul>
+                <a href="https://wa.me/01060524239?text=أريد الاشتراك في باقة Gold" class="btn-package">
+                    <i class="fab fa-whatsapp"></i> اشترك الآن
+                </a>
+            </div>
+
+            <div class="package-card">
+                <i class="fas fa-fire package-icon"></i>
+                <div class="package-name">VIP</div>
+                <div class="package-price">2000 <span>جنيه</span></div>
+                <div class="package-duration">شهرياً</div>
+                <ul class="package-features">
+                    <li><i class="fas fa-check-circle"></i> حصص غير محدودة 24/7</li>
+                    <li><i class="fas fa-check-circle"></i> مدرب خاص مخصص</li>
+                    <li><i class="fas fa-check-circle"></i> صالة تدريب خاصة</li>
+                    <li><i class="fas fa-check-circle"></i> متابعة طبية كاملة</li>
+                    <li><i class="fas fa-check-circle"></i> برنامج تغذية احترافي</li>
+                    <li><i class="fas fa-check-circle"></i> مكملات غذائية مجانية</li>
+                </ul>
+                <a href="https://wa.me/01060524239?text=أريد الاشتراك في باقة VIP" class="btn-package">
+                    <i class="fab fa-whatsapp"></i> اشترك الآن
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator" id="calculator">
+        <h2 class="section-title">حاسبة نسبة الدهون و BMI</h2>
+        <div class="calculator-container">
+            <div class="calculator-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-ruler-vertical"></i> الطول (سم)</label>
+                    <input type="number" id="height" placeholder="مثال: 170">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-weight"></i> الوزن (كجم)</label>
+                    <input type="number" id="weight" placeholder="مثال: 70">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar"></i> العمر</label>
+                    <input type="number" id="age" placeholder="مثال: 25">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-venus-mars"></i> الجنس</label>
+                    <select id="gender">
+                        <option value="male">ذكر</option>
+                        <option value="female">أنثى</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn-primary" onclick="calculateBMI()" style="width: 100%;">
+                <i class="fas fa-calculator"></i> احسب الآن
+            </button>
+
+            <div class="calc-result" id="result">
+                <div class="result-header">
+                    <h3>نتائجك الصحية</h3>
+                </div>
+                <div class="result-values">
+                    <div class="result-item">
+                        <h4>مؤشر كتلة الجسم (BMI)</h4>
+                        <p id="bmiValue">0</p>
+                    </div>
+                    <div class="result-item">
+                        <h4>نسبة الدهون المقدرة</h4>
+                        <p id="bodyFatValue">0%</p>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar">0%</div>
+                </div>
+                <div class="advice-box">
+                    <h4 style="color: var(--gold); margin-bottom: 1rem;">
+                        <i class="fas fa-lightbulb"></i> التصنيف: <span id="category"></span>
+                    </h4>
+                    <p id="advice"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="feedback" id="feedback">
+        <h2 class="section-title">آراء عملائنا</h2>
+        <div class="feedback-carousel">
+            <div class="feedback-card">
+                <div class="feedback-header">
+                    <div class="feedback-avatar">أ</div>
+                    <div class="feedback-info">
+                        <h4>أحمد محمد</h4>
+                        <div class="feedback-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="feedback-text">"تجربة استثنائية! المدربين محترفين جداً والأجهزة حديثة. خسرت 18 كيلو في 4 شهور فقط مع برنامج Gold. البيئة محفزة والنتائج مذهلة!"</p>
+                <p class="feedback-date"><i class="fas fa-calendar"></i> منذ أسبوعين</p>
+            </div>
+
+            <div class="feedback-card">
+                <div class="feedback-header">
+                    <div class="feedback-avatar">س</div>
+                    <div class="feedback-info">
+                        <h4>سارة علي</h4>
+                        <div class="feedback-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="feedback-text">"أفضل جيم في المدينة بدون منافس! فصول الزومبا رائعة والمدربات محترفات. الجو العام ممتاز والنظافة على أعلى مستوى. أنصح به بشدة!"</p>
+                <p class="feedback-date"><i class="fas fa-calendar"></i> منذ 3 أيام</p>
+            </div>
+
+            <div class="feedback-card">
+                <div class="feedback-header">
+                    <div class="feedback-avatar">م</div>
+                    <div class="feedback-info">
+                        <h4>محمود حسن</h4>
+                        <div class="feedback-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="feedback-text">"المدرب الشخصي ساعدني كثيراً في تحقيق أهدافي. البرنامج التغذوي ممتاز والنتائج واضحة. باقة VIP تستحق كل قرش!"</p>
+                <p class="feedback-date"><i class="fas fa-calendar"></i> منذ شهر</p>
+            </div>
+
+            <div class="feedback-card">
+                <div class="feedback-header">
+                    <div class="feedback-avatar">ف</div>
+                    <div class="feedback-info">
+                        <h4>فاطمة أحمد</h4>
+                        <div class="feedback-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="feedback-text">"بيئة نسائية آمنة ومريحة. المدربات متفهمات واحترافيات. حققت هدفي في خسارة الوزن بفضل البرنامج المتكامل. شكراً Royal GYM!"</p>
+                <p class="feedback-date"><i class="fas fa-calendar"></i> منذ أسبوع</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="feedback.html" class="btn-primary">
+                <i class="fas fa-comment-dots"></i> اترك تقييمك
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="./IMGS/logo.jpg" alt="Royal GYM" class="footer-logo">
+                <h3>Royal GYM</h3>
+                <p class="footer-about">رحلتك نحو جسم أقوى وحياة أصح تبدأ من هنا. انضم إلى عائلتنا الرياضية واستمتع بتجربة تدريبية لا مثيل لها.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="#home"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#about"><i class="fas fa-info-circle"></i> من نحن</a></li>
+                    <li><a href="#packages"><i class="fas fa-box"></i> الباقات</a></li>
+                    <li><a href="#calculator"><i class="fas fa-calculator"></i> الحاسبة</a></li>
+                    <li><a href="feedback.html"><i class="fas fa-star"></i> التقييمات</a></li>
+                    <li><a href="./admin/HTML/login.html"><i class="fas fa-lock"></i> دخول الأدمن</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>ساعات العمل</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-clock"></i> السبت - الخميس</li>
+                    <li style="padding-right: 2rem;">6:00 ص - 11:00 م</li>
+                    <li><i class="fas fa-clock"></i> الجمعة</li>
+                    <li style="padding-right: 2rem;">2:00 م - 11:00 م</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>القاهرة، مصر<br>المعادي، شارع 9</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>01234567890</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@royalgym.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>واتساب: 01234567890</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Royal GYM. جميع الحقوق محفوظة.</p>
+            <p>تم التصميم والتطوير بواسطة <a href="https://hydratech-tawny.vercel.app/">Abdelkader Mohamed & Mohamed Ibrahim</a></p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

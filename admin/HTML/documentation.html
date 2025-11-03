@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal GYM - التقارير والإحصائيات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
+    <link rel="shortcut icon" href="../../favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/documentation.css">
+</head>
+<body>
+    <!-- Menu Toggle Button -->
+    <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="../../IMGS/logo.jpg" alt="Royal GYM" class="sidebar-logo">
+            <h2 class="sidebar-title">Royal GYM</h2>
+            <p style="color: #999; font-size: 0.9rem;">التقارير والإحصائيات</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="../HTML/dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>لوحة التحكم</span>
+            </a>
+            <a href="../HTML/memberManage.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>المتدربين</span>
+            </a>
+            <a href="../HTML/qrScanner.html" class="nav-item">
+                <i class="fas fa-qrcode"></i>
+                <span>مسح QR</span>
+            </a>
+            <a href="../HTML/reviews.html" class="nav-item">
+                <i class="fas fa-star"></i>
+                <span>التقييمات</span>
+            </a>
+            <a href="../HTML/documentation.html" class="nav-item active">
+                <i class="fas fa-chart-line"></i>
+                <span>التقارير</span>
+            </a>
+            <a href="../HTML/login.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>الإعدادات</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-name">Admin</div>
+                <div class="user-role">مدير النظام</div>
+            </div>
+            <a href="../../index.html" class="btn btn-logout" style="width: 100%; justify-content: center;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>تسجيل الخروج</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="reports-container">
+            <!-- الهيدر الرئيسي -->
+            <div class="reports-header">
+                <h1><i class="fas fa-dumbbell"></i> تقارير Royal GYM</h1>
+                <p>نظرة شاملة على أداء الصالة وإحصائيات الأعضاء</p>
+                <p style="margin-top: 1rem; font-size: 1rem; opacity: 0.8;">آخر تحديث: <span id="lastUpdate"></span></p>
+            </div>
+
+            <!-- تصفية البيانات -->
+            <div class="date-filter">
+                <h3 class="chart-title"><i class="fas fa-filter"></i> تصفية البيانات</h3>
+                <div class="filter-group">
+                    <div>
+                        <label>من تاريخ:</label>
+                        <input type="date" id="startDate">
+                    </div>
+                    <div>
+                        <label>إلى تاريخ:</label>
+                        <input type="date" id="endDate">
+                    </div>
+                    <div>
+                        <label>نوع التقرير:</label>
+                        <select id="reportType">
+                            <option value="daily">يومي</option>
+                            <option value="weekly">أسبوعي</option>
+                            <option value="monthly">شهري</option>
+                            <option value="yearly">سنوي</option>
+                        </select>
+                    </div>
+                    <button class="btn" onclick="applyFilters()">
+                        <i class="fas fa-sync"></i> تطبيق التصفية
+                    </button>
+                </div>
+            </div>
+
+            <!-- الإحصائيات الرئيسية -->
+            <div class="stats-overview">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value" id="totalMembers">0</div>
+                    <div class="stat-label">إجمالي المتدربين</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="stat-value" id="activeMembers">0</div>
+                    <div class="stat-label">المتدربين النشطين</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="stat-value" id="totalRevenue">0</div>
+                    <div class="stat-label">إجمالي الإيرادات</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-value" id="avgRating">0</div>
+                    <div class="stat-label">متوسط التقييم</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-value" id="monthlyAttendance">0</div>
+                    <div class="stat-label">الحضور الشهري</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="stat-value" id="utilizationRate">0%</div>
+                    <div class="stat-label">معدل الاستخدام</div>
+                </div>
+            </div>
+
+            <!-- المخططات -->
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3 class="chart-title"><i class="fas fa-chart-pie"></i> توزيع الباقات</h3>
+                    <canvas id="packagesChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title"><i class="fas fa-chart-line"></i> الإيرادات الشهرية</h3>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title"><i class="fas fa-calendar-alt"></i> الحضور اليومي</h3>
+                    <canvas id="attendanceChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title"><i class="fas fa-star"></i> توزيع التقييمات</h3>
+                    <canvas id="ratingsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- التقارير التفصيلية -->
+            <div class="reports-grid">
+                <!-- الأعضاء النشطين -->
+                <div class="report-card">
+                    <h3><i class="fas fa-users"></i> الأعضاء النشطين</h3>
+                    <div class="stat-value glowing-text" style="font-size: 2.5rem;" id="activeMembersCount">0</div>
+                    <div class="stat-label">متدرب نشط حالياً</div>
+                    
+                    <h4 style="margin-top: 1.5rem; color: var(--gold);">
+                        <i class="fas fa-crown"></i> أعلى الباقات
+                    </h4>
+                    <div id="topPackages"></div>
+                </div>
+
+                <!-- الإيرادات -->
+                <div class="report-card">
+                    <h3><i class="fas fa-money-bill-wave"></i> تحليل الإيرادات</h3>
+                    <div class="stat-value glowing-text" style="font-size: 2.5rem;" id="monthlyRevenue">0</div>
+                    <div class="stat-label">إيرادات الشهر الحالي</div>
+                    
+                    <h4 style="margin-top: 1.5rem; color: var(--gold);">
+                        <i class="fas fa-chart-bar"></i> توزيع الإيرادات
+                    </h4>
+                    <div class="revenue-breakdown" id="revenueBreakdown"></div>
+                </div>
+
+                <!-- التقييمات -->
+                <div class="report-card">
+                    <h3><i class="fas fa-star"></i> تحليل التقييمات</h3>
+                    <div class="stat-value glowing-text" style="font-size: 2.5rem;" id="totalFeedbacksCount">0</div>
+                    <div class="stat-label">تقييم إجمالي</div>
+                    
+                    <h4 style="margin-top: 1.5rem; color: var(--gold);">
+                        <i class="fas fa-comments"></i> أحدث التقييمات
+                    </h4>
+                    <div id="recentFeedbacks"></div>
+                </div>
+
+                <!-- الحضور -->
+                <div class="report-card">
+                    <h3><i class="fas fa-calendar-check"></i> إحصائيات الحضور</h3>
+                    <div class="stat-value glowing-text" style="font-size: 2.5rem;" id="todayAttendance">0</div>
+                    <div class="stat-label">حضور اليوم</div>
+                    
+                    <h4 style="margin-top: 1.5rem; color: var(--gold);">
+                        <i class="fas fa-trophy"></i> أعلى معدلات الحضور
+                    </h4>
+                    <div id="topAttendance"></div>
+                </div>
+            </div>
+
+            <!-- التقرير المفصل -->
+            <div class="chart-container">
+                <h3 class="chart-title"><i class="fas fa-table"></i> تقرير المتدربين المفصل</h3>
+                <div style="overflow-x: auto;">
+                    <table class="data-table" id="membersTable">
+                        <thead>
+                            <tr>
+                                <th>رقم العضوية</th>
+                                <th>الاسم</th>
+                                <th>الباقة</th>
+                                <th>الحصص المتبقية</th>
+                                <th>آخر حضور</th>
+                                <th>الحالة</th>
+                                <th>قيمة الاشتراك</th>
+                            </tr>
+                        </thead>
+                        <tbody id="membersTableBody">
+                            <!-- سيتم تعبئتها بالبيانات -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- أزرار التصدير -->
+            <div class="export-buttons">
+                <button class="btn-export" onclick="exportToPDF()">
+                    <i class="fas fa-file-pdf"></i> تصدير PDF
+                </button>
+                <button class="btn-export" onclick="exportToExcel()">
+                    <i class="fas fa-file-excel"></i> تصدير Excel
+                </button>
+                <button class="btn-export" onclick="printReport()">
+                    <i class="fas fa-print"></i> طباعة التقرير
+                </button>
+                <button class="btn-export" onclick="generateSummary()">
+                    <i class="fas fa-chart-bar"></i> ملخص تنفيذي
+                </button>
+            </div>
+
+            <!-- الملخص التنفيذي -->
+            <div class="summary-section" id="summarySection" style="display: none;">
+                <h3 class="chart-title"><i class="fas fa-chart-pie"></i> الملخص التنفيذي</h3>
+                <div id="executiveSummary"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="../JS/documentation.js"></script>
+</body>
+</html>
